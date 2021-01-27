@@ -14,16 +14,16 @@ function hsl(h, s, l) {
 };
 
 // creates an alias for requestAnimationFrame for backwards compatibility
-window.requestAnimFrame = (function () {
-    return window.requestAnimationFrame ||
+window.requestAnimFrame = (function () { // assigns to global reference
+    return window.requestAnimationFrame || //.requestAnimationFrame is built-in to browser
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame ||
         function (/* function */ callback, /* DOMElement */ element) {
-            window.setTimeout(callback, 1000 / 60);
+            window.setTimeout(callback, 1000 / 60); // 1000 ms [1s] / 60
         };
-})();
+})(); // defined and called on the fly
 
 // add global parameters here
 

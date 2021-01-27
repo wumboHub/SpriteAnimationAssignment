@@ -4,16 +4,16 @@ class Timer {
     constructor() {
         this.gameTime = 0;
         this.maxStep = 0.05;
-        this.lastTimestamp = 0;
+        this.lastTimestamp = 0; // tracks last time we called tick
     };
 
     tick() {
-        var current = Date.now();
+        var current = Date.now(); // returns current time in ms
         var delta = (current - this.lastTimestamp) / 1000;
         this.lastTimestamp = current;
 
         var gameDelta = Math.min(delta, this.maxStep);
         this.gameTime += gameDelta;
-        return gameDelta;
+        return gameDelta; // difference b/w last time and this time
     };
 };
