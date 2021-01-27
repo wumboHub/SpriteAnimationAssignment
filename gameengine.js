@@ -5,14 +5,14 @@ class GameEngine {
         this.entities = [];
         this.showOutlines = false;
         this.ctx = null;
-        this.click = null;
+        this.click = null; // can update buttons later
         this.mouse = null;
         this.wheel = null;
         this.surfaceWidth = null;
         this.surfaceHeight = null;
     };
 
-    init(ctx) {
+    init(ctx) { //called after page has loaded
         this.ctx = ctx;
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
@@ -23,8 +23,13 @@ class GameEngine {
     start() {
         var that = this;
         (function gameLoop() {
-            that.loop();
-            requestAnimFrame(gameLoop, that.ctx.canvas);
+            that.loop(); // each time gameLoop is called, this loop runs
+            /*
+            * Passing in gameLoop makes a recursion method. The canvas
+            * being passed is what's being animated. We simulate 
+            * continuous time by using a bunch of discrete time.
+            */
+            requestAnimFrame(gameLoop, that.ctx.canvas); 
         })();
     };
 
@@ -76,23 +81,23 @@ class GameEngine {
     update() {
         var entitiesCount = this.entities.length;
 
-        for (var i = 0; i < entitiesCount; i++) {
+        for (var i = 0; i < entitiesCount; i++) { // iterates through entities
             var entity = this.entities[i];
 
-            if (!entity.removeFromWorld) {
+            if (!entity.removeFromWorld) { //if entity is not removed, it calls update
                 entity.update();
             }
         }
 
-        for (var i = this.entities.length - 1; i >= 0; --i) {
-            if (this.entities[i].removeFromWorld) {
-                this.entities.splice(i, 1);
+        for (var i = this.entities.length - 1; i >= 0; --i) { //iterate backwards
+            if (this.entities[i].removeFromWorld) { // checks is entity removed
+                this.entities.splice(i, 1); //starting at i, remove 1 item
             }
         }
     };
 
     loop() {
-        this.clockTick = this.timer.tick();
+        this.clockTick = this.timer.tick(); // ticks timer
         this.update();
         this.draw();
     };
