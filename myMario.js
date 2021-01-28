@@ -7,7 +7,7 @@ class myMario {
 
         this.animations = [];
         // sprites added
-        this.animations[0] = new Animator(this.spritesheet, 8, 76, 16, 32, 2, 0.5, 24, false, false);
+        this.animations[0] = new Animator(this.spritesheet, 8, 76, 16, 32, 2, 0.5, 24, false, true);
         this.animations[1] = new Animator(this.spritesheet, 88, 76, 16, 32, 1, 0.5, 24, false, false);
         this.animations[2] = new Animator(this.spritesheet, 328, 76, 16, 32, 2, 0.5, 24, false, false);
         this.animations[3] = new Animator(this.spritesheet, 248, 76, 16, 32, 1, 0.5, 24, false, true);
