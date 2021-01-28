@@ -4,11 +4,12 @@ class Animator {
 
         this.elapsedTime = 0;
         this.totalTime = this.frameCount * this.frameDuration;
-
+        this.frames = 0;
     };
 
     drawFrame(tick, ctx, x, y, scale) {
         this.elapsedTime += tick;
+        this.frames = Math.floor(this.elapsedTime) % 4;
 
         if (this.isDone()) {
             if (this.loop) {
@@ -29,14 +30,15 @@ class Animator {
             this.width * scale,
             this.height * scale);
 
-        if (PARAMS.DEBUG) {
-            ctx.strokeStyle = 'Green';
-            ctx.strokeRect(x, y, this.width * scale, this.height * scale);
-        }
+        // if (PARAMS.DEBUG) {
+        //     ctx.strokeStyle = 'Green';
+        //     ctx.strokeRect(x, y, this.width * scale, this.height * scale);
+        // }
     };
 
     currentFrame() {
         // if elapsed time is less than half frameDuration, it's 0
+        console.log(this.elapsedTime);
         return Math.floor(this.elapsedTime / this.frameDuration);
     };
 
